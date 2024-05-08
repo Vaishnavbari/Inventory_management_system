@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+</head>
+<style>
+    body{
+        margin:0;
+        padding:0;
+        
+      }
+
+    .main{
+  
+      height:100vh;
+      width:100vw;
+      background-image: url("{% static 'images/bacground.png' %}");
+      background-size:cover;
+      
+    
+      }
+      .sub{
+    
+        width: 94%;
+        height:89%;
+        box-shadow: 0px 4px 4px 0px #00000040;
+        background: None;
+       
+        border-radius: 30px;
+        
+
+
+      }
+      :placeholder {
+        font-family: Cardo;
+font-size: 2rem;
+font-weight: 700;
+line-height: 34px;
+letter-spacing: 0em;
+text-align: center;
+
+
+
+      }
+
+      @media screen and (max-width:1361px) {
+        .f{
+            font-size: 0.8rem !important;
+        }
+        .i{
+            height: 8rem;
+        }
+        .text1{
+            font-size: 1.5rem !important;
+        }
+        .text2{
+            font-size: 0.8rem !important;;
+        }
+    
+    }
+    @media screen and (max-width:800px) {
+        .right{
+            display: none;
+        }
+        .text1{
+            font-size: 1.5rem !important;
+        }
+        .text2{
+            font-size: 0.8rem !important;;
+        }
+        
+    }</style>
+<body>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+    <div class="container-fluid main d-flex justify-content-center align-items-center">
+        
+     <div class="sub d-flex justify-content-center align-items-center  border" style="padding: 2%;">
+      <div class="menu" style="height:90%; width:90%">
+        
+      
+        <div class="left col-12 d-flex" style="flex-direction:column; height:100%; justify-content:space-around;">
+          <p class="text1"  style="color: #26599F;
+          
+          font-family: Cardo;
+         font-size:2rem;
+          font-weight: 700;
+          line-height: 68px;
+          letter-spacing: 0em;
+          text-align: left;
+          " >Register</p>
+          {% include "app/messages.html" %}
+          <span style="font-family: Cardo;
+          font-size: 1rem;
+          font-weight: 700;
+          line-height: 34px;
+          letter-spacing: 0em;
+         
+          
+          " class="text2">See your growth and get support!</span>
+          <p for="email"  class="mt-3 text1" style="font-family: Cardo;
+          font-size: 1.6rem;
+          font-weight: 700;
+          line-height: 34px;
+          letter-spacing: 0em;
+          color: #26599F;
+
+          " >Username :</p>
+          <input type="text" style="width:34.875 rem;
+          height: 5rem;
+          box-shadow: 0px 4px 4px 0px #00000080;
+          border-radius: 10px;
+          padding:1rem;
+          " placeholder="Enter you username..." name="username"  value="{{data.username}}">
+          <div >
+            {% for error in error.username %}
+            <span style="color:red">
+              {{error}}
+          </span>
+          
+                {% endfor %}
+            </div>
+          <p for="password" style="font-family: Cardo;
+          font-size: 1.6rem;
+          font-weight: 700;
+          line-height: 34px;
+          letter-spacing: 0em;
+          color: #26599F;
+
+          " class="mt-3 text1">Password :</p>
+          <input type="text" style="width:34.875 rem;
+          height: 5rem;
+          
+          border-radius: 15px;
+         
+          box-shadow: 0px 4px 4px 0px #00000080;
+          border-radius: 10px;
+          padding:1rem;
+          "
+          placeholder="Enter your password..." name="password"  value="{{data.password}}">
+          <div >
+            {% for error in error.password %}
+            <span style="color:red">
+              {{error}}
+          </span>
+          
+                {% endfor %}
+            </div>
+          <p for="password" style="font-family: Cardo;
+          font-size:1.6rem;
+          font-weight: 700;
+          line-height: 34px;
+          letter-spacing: 0em;
+          color: #26599F;
+
+          " class="mt-3 text1">Firstname:</p>
+          <input type="text" style="width:34.875 rem;
+          height: 5rem;
+          
+          border-radius: 10px;
+         
+          box-shadow: 0px 4px 4px 0px #00000080;
+          border-radius: 15px;
+          padding:1rem;
+          "
+          id="fname" name="fname" value="{{data.firstname}}" placeholder="Enter your firstname...">
+          <div >
+            {% for error in error.firstname %}
+            <span style="color:red">
+              {{error}}
+          </span>
+          
+                {% endfor %}
+            </div>
+          <p for="password" style="font-family: Cardo;
+          font-size: 1.6rem;
+          font-weight: 700;
+          line-height: 34px;
+          letter-spacing: 0em;
+          color: #26599F;
+
+          " class="mt-3 text1">Lastname:</p>
+          <input type="text" style="width:34.875 rem;
+          height: 5rem;
+          
+          border-radius: 10px;
+         
+          box-shadow: 0px 4px 4px 0px #00000080;
+          border-radius: 15px;
+          padding:1rem;
+          "
+          id="lname" name="lname" value="{{data.lastname}}" placeholder="Enter your lastname....">
+          <div>
+            {% for error in error.lastname %}
+            <span style="color:red">
+              {{error}}
+          </span>
+          
+                {% endfor %}
+            </div>
+          
+        <button class="mt-4" style="background: #26599F;
+        box-shadow: 0px 4px 4px 0px #00000040;
+        border-radius: 10px;
+        color:white;
+        width:34.875 rem;
+          height: 5rem;
+          
+           "><span style="font-family: Cardo;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 41px;
+        letter-spacing: 0em;
+        text-align: center;
+        
+        " class="text1">
+           Register
+        </span> </button>
+        <p style="font-family: Cardo;
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 34px;
+        letter-spacing: 0em;
+       
+        " class="mt-4 text2">Do you have account? <a href="{% url 'login' %}" style="color:black;">Login here</a></p>
+        </div>
+    </div>
+
+        <div class="right col-6" style="padding-left: 4%;">
+         <div class="figure">
+          <div class="image d-flex" style="justify-content:center" >
+             <img class="figure-img img-fluid rounded i" src="{% static 'images/logo.png' %}" >
+          </div>
+          <div class="content d-flex" style="justify-content:center; padding:3%">
+<span style="font-family: Cardo;
+font-size: 1rem;
+font-weight: 700;
+line-height: 27px;
+letter-spacing: 0em;
+
+
+" class="f">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
+    
+</span>
+          </div>
+         </div>
+        </div>
+      </div>
+     </div> 
+    </div>
+</form>
+</body>
+</html>     

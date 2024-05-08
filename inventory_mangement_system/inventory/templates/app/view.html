@@ -1,0 +1,114 @@
+{% extends "user/base.html" %}
+{% block inventorycontent %}
+<div class="inventoryssummary" >
+  <p class="h2">
+    {{ product.product_name }}
+  </p>
+  <a href="{% url 'edit' product.id %}" class="p-20" style="color:white; font-size: 1rem;">
+  <button class="btn" style="padding:10px 50px">
+   
+      Edit product
+    
+  </button>
+</a>
+</div>
+<hr>
+{% endblock inventorycontent %}
+
+{% block maincontent %}
+
+  <div class="row" style="margin-left:0; margin-top: 23px;">
+    <div class="col-3">
+      <div class=" bg-white" style="width:20rem; height:10rem; border-radius:25px ;display:flex; align-items:center; justify-content: center; background-size:cover;">
+        {% if image %}
+        {% for image in image %}
+          <img src="{{ MEDIA_URL }}{{ image.image.url }}" alt="" style="height:8rem; width:8rem">
+          {% endfor %}
+        {% else %}
+          <p>No image uploaded</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-8 bg-white ml-20" style="border-radius:25px;margin-left:25px;">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="m-4">
+            Lastorder: sep 9 2023
+          </h4>
+        </div>
+      </div>
+      <div class="row d-flex">
+        <div class="col-3 d-flex" style="flex-direction:column; align-items: center;">
+          <h3>
+            Unit Price
+          </h3>
+          <h3>
+            {{product.cost_price}}
+          </h3>
+        </div>
+        <div class="col-3 d-flex" style="flex-direction:column; align-items: center;">
+          <h3>
+            In Stock
+          </h3>
+          <h3>
+            {{product.quantity_in_stock}}
+          </h3>
+        </div>
+        <div class="col-3 d-flex" style="flex-direction:column; align-items: center;">
+          <h3>
+            Order Total
+          </h3>
+          <h3>
+            {{count}}
+          </h3>
+        </div>
+        <div class="col-3 d-flex" style="flex-direction:column; align-items: center;">
+          <h3>
+            Sold
+          </h3>
+          <h3>
+           {{sold.quantity__sum}}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+    <table class="table bg-white col-11 " style="border-radius:25px; width:93%; margin-top:20px; margin-left:20px; margin-right:20px;">
+     
+      <thead>
+        <tr>
+          <th>
+            Purchase history
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">product_name</th>
+          <th scope="col">quantity</th>
+          <th scope="col">order_date</th>
+          <th scope="col">Tracking_id</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in purchase %}
+        <tr>
+          <th >{{ forloop.counter }}</th>
+          <td>{{i.product_name}}</td>
+          <td>{{i.quantity}}</td>
+          <td>{{i.order_date}}</td>
+          <td>{{i.tracking_id}}</td>
+          <td>{{i.get_status_display}}</td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+
+
+
+{% endblock %}

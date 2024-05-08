@@ -1,0 +1,387 @@
+
+{% extends "user/base.html" %} 
+{% load static %}
+{% block inventorycontent %}
+  {% endblock inventorycontent %}
+  {% block maincontent %}
+<div class="container-fluid img-fluid">
+
+<div class="row" >
+  <div class="col-8" style=" box-shadow: 0px 4px #0000004D;" >
+    <div class="h2 myclass4">
+      <b>Sales activity</b>
+      </div>
+      <div class="container-fluid d-flex col-12 justify-content-space-between mb-3 " style="justify-content:space-around">
+
+        <div class="card col-3" style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D; 
+        margin:8px;">
+       
+            <div class="card-body" style="display: flex;
+            flex-direction: column;
+            justify-content: space-around;">
+              <h1 class="card-title  d-flex justify-content-end myclass3" style=" font-size:60px; color: #F8B042;
+              "><span 
+style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+">3001</span></h1>
+              <h5 class="card-text d-flex justify-content-end myclass4 j "><i  style="margin-top: -25px;" class="j">quantity </i></h5>
+              <div class="row d-flex " style="justify-content:space-between; flex-wrap:nowrap"> 
+                <img class="mz" src="{% static 'images/v1.jpg' %}" class="img-fluid d-flex" style="align-self:center; width: 3.75rem;
+                height: 3.75rem;" alt="">
+
+                <h6 class="card-text myclass6 d-flex" style="align-self:center">TO BE PACKED </h6>
+
+              </div>
+            </div>   
+        </div>
+        <div class="card col-3" style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D; 
+        margin:8px;">
+       
+            <div class="card-body" style="display: flex;
+            flex-direction: column;
+            justify-content: space-around;">
+              <h1 class="card-title  d-flex justify-content-end myclass3" style=" font-size:60px; color: #F8B042;
+              "><span 
+style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+">12</span></h1>
+              <h5 class="card-text d-flex justify-content-end  myclass4 j"><i style="margin-top: -25px;">Package </i></h5>
+              <div class="row d-flex " style="justify-content:space-evenly; flex-wrap:nowrap"> 
+                <img src="{% static 'images/v2.jpg' %}" class="img-fluid d-flex mz" style="align-self:center; width: 3.75rem;
+                height: 3.75rem;" alt="">
+
+                <h6 class="card-text myclass6 d-flex" style="align-self:center">TO BE SHIPPED </h6>
+
+              </div>
+            </div>   
+        </div>
+        <div class="card col-3" style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D; 
+        margin:8px;">
+       
+            <div class="card-body" style="display: flex;
+            flex-direction: column;
+            justify-content: space-around;">
+              <h1 class="card-title  d-flex justify-content-end myclass3" style=" font-size:60px; color: #F8B042;
+              "><span 
+style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+">21</span></h1>
+              <h5 class="card-text d-flex justify-content-end  myclass4 j"><i style="margin-top: -25px;">Package </i></h5>
+              <div class="row d-flex " style="justify-content:space-evenly; flex-wrap:nowrap"> 
+                <img src="{% static 'images/v3.jpg' %}" class="img-fluid d-flex mz" style="align-self:center; width: 3rem;
+                height: 3rem;" alt="">
+
+                <h6 class="card-text myclass6 d-flex" style="align-self:center">TO BE DELIVERED</h6>
+              </div>
+            </div>   
+        </div>
+        <div class="card col-3" style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D; 
+        margin:8px;">
+       
+            <div class="card-body" style="display: flex;
+            flex-direction: column;
+            justify-content: space-around;">
+              <h1 class="card-title  d-flex justify-content-end myclass3" style=" font-size:60px; color: #F8B042;
+              "><span 
+style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+">101</span></h1>
+              <h5 class="card-text d-flex justify-content-end  myclass4 j"><i style="margin-top: -25px;">quantity </i></h5>
+              <div class="row d-flex " style="justify-content:space-evenly; flex-wrap:nowrap"> 
+                <img src="{% static 'images/v4.jpg' %}" class="img-fluid d-flex mz" style="align-self:center; width: 3.75rem;
+                height: 3.75rem;" alt="">
+
+                <h6 class="card-text myclass6 d-flex" style="align-self:center">TO BE INVOICED </h6>
+              </div>
+            </div>   
+        </div>
+  </div>
+</div>
+  <div class="col-4 container-fluid d-flex"  style="flex-direction:column; justify-content:space-evenly; box-shadow: 0px 4px 4px 0px #0000004D;">
+    <div class="row d-flex" style="align-self: center;">
+        <div class="col d-flex" style="flex-direction:column;">
+    
+            <div class="h2 myclass4"><b>Inventory Summary 
+              </b></div>
+            <span>(In Quantity)</span>
+         </div>
+         
+    </div>
+    <div class="container d-flex mb-2" style="flex-direction:column; justify-content:space-evenly;">
+        <center>
+        <div class="row col-8" style=""  >
+          
+                <div class="col d-flex bg-white " style=" box-shadow: 0px 4px 4px 0px #0000004D; justify-content:space-between; border-radius:7px; ">
+                    <div class="h4 myclass4 d-flex" style="padding:10px; "><img src="{% static 'images/l1.jpg' %}" class="img-fluid" alt=""><b class="ml-2">In stock</b></div>
+                    <h2 class="myclass2 d-flex"  style="color: #F8B042BB;
+                    align-self:end">{{instock.total_stock}}</h2>
+                    
+                </div>   
+        </div>
+    </center>
+    <center>
+      <div class="row col-8 mt-3" style=""  >
+          
+        <div class="col d-flex bg-white " style=" box-shadow: 0px 4px 4px 0px #0000004D; justify-content:space-between; border-radius:7px; ">
+            <div class="h4 myclass4 d-flex" style="padding:10px; "><img src="{% static 'images/l1.jpg' %}" class="img-fluid" alt=""><b class="ml-2">Re stock</b></div>
+            <h2 class="myclass2 d-flex"  style="color: #F8B042BB;
+            align-self:end">102002</h2>
+            
+        </div>   
+            
+        </div>
+    </center>
+    </div>
+  
+  </div>
+
+
+<div class="container-fluid d-flex row " style="justify-content:space-evenly; margin-top:10px; width:100%; ">
+    <div class="card col m-4" style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D;
+    ">
+   
+    <div class="card-body">
+        <div class="row d-flex " style="justify-content:space-between; flex-wrap:nowrap"> 
+            
+          <img src="{% static 'images/v21.jpg' %}" class="img-fluid mz" alt="">
+
+          <img src="{% static 'images/v22.jpg' %}" class="img-fluid mz" alt="">
+            
+
+          </div>
+          <h5 class="card-text d-flex justify-content-end" style="margin-top:1.6rem;"><i style=" font-size:1.9rem;" class="myclass myclass4"> $ </i>
+            <i style=" font-size:1.9rem;" class="myclass myclass4">{{revenue}}</i></h5>
+        <div class="row d-flex " style="justify-content:space-between; margin-top:1.6rem; flex-wrap:nowrap"> 
+           <h6 class="card-text y"><b>Total revenue </b></h6>
+         
+           <h6 class="card-text y"> 
+            <img style="height: 2rem;" src="{% static 'images/vbb.jpg' %}" class="img-fluid" alt="" class="mr-0" ><b style="color: #26599F;
+            ">25%</b></h6>
+         
+
+          
+
+        </div>
+      </div>   
+    </div>
+    <div class="card col m-4 " style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D;
+    ">
+   
+    <div class="card-body">
+        <div class="row d-flex " style="justify-content:space-between; flex-wrap:nowrap"> 
+            
+          <img src="{% static 'images/v23.jpg' %}" class="img-fluid mz" alt="">
+
+          <img src="{% static 'images/v24.jpg' %}" class="img-fluid mz" alt="">
+            
+
+          </div>
+          <h5 class="card-text d-flex justify-content-end" style="margin-top:1.6rem;"><i style=" font-size:1.9rem;" class="myclass myclass4"> $ {{total_expenses}} </i>
+            <i style=" font-size:1.9rem;" class="myclass myclass4"> </i></h5>
+        <div class="row d-flex " style="justify-content:space-between; margin-top:1.6rem; flex-wrap:nowrap"> 
+           <h6 class="card-text y"><b>Total expenses </b></h6>
+         
+           <h6 class="card-text y"> 
+            <img style="height: 2rem;" src="{% static 'images/vbb.jpg' %}" class="img-fluid" alt="" class="mr-0" ><b style="color: #26599F;
+            ">25%</b></h6>
+         
+
+          
+
+        </div>
+      </div>   
+    </div>
+    <div class="card col m-4 " style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D;
+    ">
+   
+    <div class="card-body">
+        <div class="row d-flex " style="justify-content:space-between; flex-wrap:nowrap"> 
+            
+          <img src="{% static 'images/v25.jpg' %}" class="img-fluid mz" alt="">
+
+          <img src="{% static 'images/v26.jpg' %}" class="img-fluid mz" alt="">
+            
+
+          </div>
+          <h5 class="card-text d-flex justify-content-end" style="margin-top:1.6rem;"><i style=" font-size:1.9rem;" class="myclass myclass4"> $ </i>
+            <i style=" font-size:1.9rem;" class="myclass myclass4"> {{customer_count}}</i></h5>
+        <div class="row d-flex " style="justify-content:space-between; margin-top:1.6rem; flex-wrap:nowrap"> 
+           <h6 class="card-text y"><b>Total customer </b></h6>
+         
+           <h6 class="card-text y"> 
+            <img style="height: 2rem;" src="{% static 'images/vbb.jpg' %}" class="img-fluid" alt="" class="mr-0" ><b style="color: #26599F;
+            ">25%</b></h6>
+         
+
+          
+
+        </div>
+      </div>   
+    </div>
+    <div class="card col m-4" style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D;
+    ">
+   
+    <div class="card-body">
+        <div class="row d-flex " style="justify-content:space-between; flex-wrap:nowrap"> 
+            
+          <img src="{% static 'images/v27.jpg' %}" class="img-fluid mz" alt="">
+
+          <img src="{% static 'images/v28.jpg' %}" class="img-fluid mz" alt="">
+            
+
+          </div>
+          <h5 class="card-text d-flex justify-content-end" style="margin-top:1.6rem;"><i style=" font-size:1.9rem;" class="myclass myclass4"> $ </i>
+            <i style=" font-size:1.9rem;" class="myclass myclass4"> {{order_count}} </i></h5>
+        <div class="row d-flex " style="justify-content:space-between; margin-top:1.6rem; flex-wrap:nowrap"> 
+           <h6 class="card-text y"><b>Total order</b></h6>
+         
+            <h6 class="card-text y"> 
+              <img style="height: 2rem;" src="{% static 'images/vbb.jpg' %}" class="img-fluid" alt="" class="mr-0" ><b style="color: #26599F;
+              ">25%</b></h6>
+        
+        </div>
+      </div>   
+    </div>
+</div>
+
+<div class="container-fluid d-flex">
+ <div class="card col m-2 " style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D;
+    ">
+   
+    <div class="card-body">
+       <div class="row " >
+        <div class="col d-flex" style="justify-content:space-between">
+            <h3 class="myclass4"><b>Inventory</b></h3>
+            <h6 class="myclass6">view all<<</h6>
+        </div>
+       </div>
+
+       <div class="row myclass7" >
+        <div class="col d-flex" style="justify-content:space-between">
+            <h5 class="myclass7"  >Low in stock </h5>
+            <h6 class="myclass6">{{inventory.count}} items</h6>
+        </div>
+       </div>
+       <div class="row " style="background: #FFF2EB;
+       ">
+        <div class="col  m-2" style="justify-content:space-between">
+            <span style="color:red" class="myclass6">This item is low of stock, please order it soon! </span>
+            
+        </div>
+       </div>
+       {% for inventory in inventory %}
+       <div class="row  myclass6" >
+        <div class="col d-flex" style="justify-content:space-between">
+            <div class="d-flex" style="flex-direction:column">
+                <h6 class=" myclass6">{{inventory.product_name}}</h6>
+                <h6 class=" myclass6">Available {{inventory.quantity_in_stock}} </h6>
+            </div>
+            <a href=""  style="color: #26599F; display: flex;
+            align-self: center;" > Order Now</a>
+        </div>
+       </div>
+       <hr class="dotted-hr">
+       {% endfor %}
+      
+      </div>   
+         
+    </div>
+    <div class="card col  m-2  " style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D;
+    ">
+   
+    <div class="card-body">
+       <div class="row " >
+        <div class="col d-flex" style="justify-content:space-between">
+            <h3 class="myclass4"><b>Top Selling</b></h3>
+            <div class="dropdown">
+              <span class="dropdown-toggle"  id="dropdownMenu2" data-toggle="dropdown" >
+               This month
+              </span>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <span class="dropdown-item" type="button">Action</span>
+                <span  class="dropdown-item" type="button">Another action</span>
+                <span class="dropdown-item" type="button">Something else here</span>
+              </div>
+            </div>
+        </div>
+       </div>
+
+       <div class="row myclass7" >
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Sold</th>
+              <th scope="col">Price</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for top in top_selling %}
+            <tr>
+              <td>{{top.name}}</td>
+              <td>{{top.sold}}</td>
+              <td>{{top.price}}</td>
+            </tr>
+            {% endfor %}
+            
+          </tbody>
+        </table>
+       </div>
+       
+      </div>   
+         
+    </div>
+    <div class="card col m-2 " style="border-radius:25px; box-shadow: 0px 4px 4px 0px #0000004D;
+    ">
+   
+    <div class="card-body">
+       <div class="row " >
+        <div class="col d-flex" style="justify-content:space-between">
+            <h3 class="myclass4"><b>Recent orders</b></h3>
+            <h6 class="myclass6">view all<<</h6>
+        </div>
+       </div>
+       {% for orders in recent_orders %}
+       <div class="row " >
+      
+          <div class="col d-flex"  style="justify-content:space-around">
+           
+            <div class="col">
+              <img src="{% static 'images/ip.jpg' %}" class="img-fluid d-flex mz" style="flex-direction:column;align-self:center" alt="">
+
+            </div>
+            <div class="col d-flex" style="flex-direction:column ">
+              <h5 class="myclass7" style="font-family: Cardo;
+              font-size:1.2rem;
+              font-weight: 700;
+              line-height: 24px;
+              letter-spacing: 0em;
+              text-align: left;
+              "  >{{orders.product_name.product_name}} </h5>
+              <h6 class="myclass6">Order id: {{orders.tracking_id}}</h6></div>
+          </div>
+          <div class="col">
+            <h5 class="myclass7 d-flex"  >{{orders.order_date}}</h5>
+            <button class=" btn myclass6" style="color: #FF5500; background: #FFE6DA;
+
+            ">{{orders.get_status_display}}</button>
+          </div>
+        
+       </div>
+       <hr class="dotted-hr">
+       {% endfor %}
+       
+      
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+ {% endblock maincontent %}

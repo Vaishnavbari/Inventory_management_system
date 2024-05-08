@@ -1,0 +1,156 @@
+{% extends "user/base.html" %}
+{% block inventorycontent %}
+{% endblock %}
+ {% block maincontent %}
+
+ <form action="{% url 'addinventory' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+ <div class="ninventory_item  d-flex w-100   " style="justify-content: space-between ">
+    <div class="h5 col-md-4 col-lg-3">
+        New inventory item
+    </div>
+    <div class="mr-0 col-md-4">
+        <button type="sumbit" class="btn btn-primary" style="padding:10px 50px" >Add Inventory</button>
+    </div>
+ </div>
+ <center>{% include "app/messages.html" %}</center>
+<hr>
+<div class="side d-flex col-sm-12" style="height:65vh">
+    <div class="side1 col-sm-8 bg-white" style="border-radius:25px">
+     <div class="row">
+        <div class="col">
+            <div class="input-group col-md-6">
+                <p class="text-sm-1">Product Name</p>
+              </div>
+              <div class="input-group">
+                <input type="text" class="form-control " placeholder="Enter product name" aria-label="Username" aria-describedby="basic-addon1" name="pname" value="{{product_name}}" id="pname">
+       
+              </div>
+              <div class="input-group">
+                {% for error in error.product_name %}
+                <span style="color:red">
+                    {{error}}
+                </span>
+                
+              {% endfor %}
+              </div>
+             <div class="input-group">
+                <select name="pcategory" id="" style="height: 42px;
+                width: 100%;
+            "> 
+                    <option value="">choose category</option>
+                    {% for category in category %}
+                    <option value="{{category}}">{{category}}</option>
+                    {% endfor %}
+        </select>
+             </div>
+             <div class="input-group">
+                {% for error in error.product_category %}
+                <span style="color:red">
+                    {{error}}
+                </span>
+                
+                      <br>
+
+                      {% endfor %}
+             </div>
+         <div class="input-group">
+            <input type="text" class="form-control" placeholder="selling price " aria-label="Username" aria-describedby="basic-addon1" name="sprice" value="{{selling_price}}">
+            
+         </div>
+         <div class="input-group">
+            {% for error in error.selling_price %}
+            
+                      <span style="color:red">
+                          {{error}}
+                      </span>
+                      
+                      
+                      {% endfor %}
+         </div>
+
+           <div class="input-group">
+            <input type="text" class="form-control" placeholder="cost price" aria-label="Username" aria-describedby="basic-addon1" name='cprice' value="{{cost_price}}">
+            
+           </div>
+           <div class="input-group">
+           {% for error in error.cost_price %}
+           <span style="color:red">
+            {{error}}
+        </span>
+        
+                      {% endfor %}
+            </div>
+            <div class="input-group">
+                <input type="number" class="form-control " placeholder="Quantity in Stock" aria-label="Username" aria-describedby="basic-addon1" name="quantity" value={{quantity}}>
+                
+            </div>
+            <div class="input-group">
+            {% for error in error.quantity %}
+            <span style="color:red">
+                {{error}}
+            </span>
+            
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Short description"  name="sd" value="{{sdescription}}">
+              </div>
+              <div class="input-group">
+                {% for error in error.short_description %}
+                <span style="color:red">
+                    {{error}}
+                </span>
+                
+          {% endfor %}
+              </div>
+              <div class="input-group ">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="15" placeholder="Enter detail description" name="dd">{{ldescription}}</textarea>
+              </div>
+        </div>
+     </div>
+    </div>
+    <div class="side2 col-sm-4 bg-white ml-2" style="border-radius:25px;">
+        <div class="input-group h40">
+            <input type="file" class="form-control " placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="file"  multiple  >
+          </div>
+
+          <div class="input-group">
+          {% for error in error.image %}
+          <span style="color:red">
+            {{error}}
+        </span>
+        
+          {% endfor %}
+        </div>
+        </div>
+    </div>
+</div>
+</form>
+<script >
+    $(document).ready(function () {
+        $("#pname").change(function () {
+          var selectedValue = $(this).val();
+          console.log(selectedValue)
+          $.ajax({
+            url: `/inventory/check/${selectedValue}`,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              if (response.true="true"){
+                alert("product already exist")
+                location.reload()
+              }
+              
+             
+            },
+            error: function (xhr, status, error) {
+              console.error(error);
+            },
+          });
+        });
+      });
+</script>
+ {% endblock maincontent %}

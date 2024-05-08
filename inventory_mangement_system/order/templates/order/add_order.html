@@ -1,0 +1,143 @@
+{% extends "order/customeroreder.html" %} {% block content %}
+<center>
+  {% include "app/messages.html" %}
+  <form class="container" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleFormControlInput1" style="font: cardo"
+        >Select category</label
+      >
+      <select name="pcategory" id="price" class="form-control">
+        <option value="">Choose category</option>
+        {% for category in category %}
+        <option value="{{category.id}}">{{category}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlInput1">select product</label>
+      <select name="product" id="product" class="form-control">
+        <option value="">Choose product</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="">Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        name="Quantity"
+        placeholder="Enter qauntity "
+        id="q"
+      />
+      
+    </div>
+    <div class="form-group">
+      <label for="">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        name="price"
+        placeholder="Enter price "
+        value=""
+        id="p"
+        readonly
+      />
+     
+    </div>
+    <input
+      type="submit"
+      value="Add Order"
+      class=""
+      style="background: #7e9dff"
+    />
+  </form>
+</center>
+<script>
+  $(document).ready(function () {
+    $("#price").change(function () {
+      var selectedValue = $(this).val();
+      
+      $.ajax({
+        url: `/order/show_selected_product/${selectedValue}`,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+          console.log(response);
+          $("#product").empty();
+          $("#product").append('<option value="">Choose product</option>');
+          $.each(response.x, function (index, response) {
+            
+            $("#product").append(
+              '<option value="' + response.poduct_id + '">' +
+                response.product_name +
+                "</option>"
+            );
+          });
+         
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        },
+      });
+    });
+  });
+
+
+
+
+  
+  $(document).ready(function () {
+    $("#q").change(function () {
+      var selectedValue = $("#product").val();
+      console.log(selectedValue)
+      var q=$("#q").val();
+      var g=$("#p").val();
+      console.log(g)
+      $.ajax({
+        url: `/order/validation/${selectedValue}/${q}`,
+        type: "GET",
+       
+        success: function (response) {
+         console.log(response);
+         if (response.true == "true"){
+           alert(" quantity not available");
+         
+           $("#q").val("");
+           $("#p").val("");
+        }
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        },
+      });
+    });
+  });
+
+
+
+
+  $(document).ready(function () {
+    $("#q").change(function () {
+      var selectedValue = $("#product").val();
+      console.log(selectedValue)
+      var q=$("#q").val();
+      console.log(q)
+      $.ajax({
+        url: `/order/count/${selectedValue}/${q}`,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+          console.log(response);
+          $("#p").empty();
+          $("#p").val(response.x)
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        },
+      });
+    });
+  });
+</script>
+
+{% endblock content %}

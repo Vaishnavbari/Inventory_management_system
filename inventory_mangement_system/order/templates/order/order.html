@@ -1,0 +1,268 @@
+{% extends "user/base.html" %}
+
+{% block inventorycontent %}
+{% endblock %}
+ {% block maincontent %}
+<div class="ordersummury ml-4 text-sm text-md text-lg-2 text-xl">
+
+    <h1 class="h3 myclass" style="font-family: Cardo;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0em;
+    color: #000000;
+
+    ">
+    Order Summary
+    </h1>
+   
+</div>
+<hr>
+<div class="row" style="margin-left:0; height: 13rem;">
+  <div class="col-4 bg-white " style="border-radius:25px; margin-left:20px;  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;">
+    <div class="row">
+      <div class="col-12">
+        <h4  class="text-sm text-md text-lg text-xl d myclass" >
+          <div  style="height:2.8rem; width:2.8rem; background: #F8B04280; border-radius:25px; display: flex;
+            justify-content: center;
+            align-items: center;">
+            
+            <i class="fas fa-shopping-bag myclass" style="font-size:1.rem;  
+            background: None;"></i>
+          </div>
+        </h4>
+      </div>
+    </div>
+    <div class="row "  >
+      <div class="col" style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl  myclass g">
+         Allorder
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+         {{all_order_count.id__count}}
+        </h6>
+      </div>
+      <div class="col"  style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl myclass g">
+          pending
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+      {{pending}}
+        </h6>
+      </div>
+      <div class="col"  style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl myclass g">
+          completed
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+          {{completed}}
+        </h6>
+      </div>
+      
+    </div>
+  </div>
+  <div class="col-4 bg-white " style="border-radius:25px; margin-left:20px;  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;">
+    <div class="row">
+      <div class="col-12">
+        <h4  class="text-sm text-md text-lg text-xl d myclass">
+          <div  style="height:2.8rem; width:2.8rem; background: #9DBDBAB2;
+          border-radius:25px; display: flex;
+          justify-content: center;
+          align-items: center;">
+          
+          <i class="fas fa-shopping-bag myclass" style="font-size:1.rem;  
+          background: None;"></i>
+        </div>
+        </h4>
+      </div>
+    </div>
+    <div class="row "  >
+      <div class="col" style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl  myclass g ">
+         Cancel
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+         {{cancel}}
+        </h6>
+      </div>
+      <div class="col"  style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl myclass g">
+         Return
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+      {{return}}
+        </h6>
+      </div>
+      <div class="col"  style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl myclass g">
+          Damaged
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+          {{damaged}}
+        </h6>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="col-3 bg-white " style="border-radius:25px; margin-left:20px;  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;">
+    <div class="row">
+      <div class="col-12">
+        <h4>
+          <div  style="height:2.8rem; width:2.8rem; background: #FF550040;
+
+          border-radius:25px; display: flex;
+          justify-content: center;
+          align-items: center;">
+          
+          <i class="fas fa-shopping-bag myclass" style="font-size:1.rem;  
+          background: None;"></i>
+        </div>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col"  style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl myclass g">
+         Allorder
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+          450
+        </h6>
+      </div>
+      <div class="col"  style=" display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; align-items: center;">
+        <h4  class="text-sm text-md text-lg text-xl myclass g">
+          pending
+        </h4>
+        <h6  class="text-sm text-md text-lg text-xl myclass v">
+      80
+        </h6>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+<hr>
+<table class="table bg-white col-11 " style="border-radius:25px; width:96%; margin-top:20px; margin-left:20px; margin-right:20px;">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">product_name</th>
+      <th scope="col">quantity</th>
+      <th scope="col">price</th>
+      <th scope="col">order_date</th>
+      <th scope="col">Tracking_id</th>
+      <th scope="col">status</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in product %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+
+      <td>{{order.product_name.product_name}}</td>
+      <td>{{order.quantity}}</td>
+      <td>{{order.order_total}}</td>
+      <td>{{order.order_date}}</td>
+      <td>{{order.tracking_id}}</td>
+      {% if order.get_status_display == "pending" %}
+      <td>
+      
+        <select name="s" class="v1 btn btn-danger" style="height:3rem; width:11rem;background: none;
+        color: black;" id ="{{order.id}}">
+          <option value="0">Pending</option>
+          <option value="1">Completed</option>
+          <option value="4">cancel</option>
+     </select>
+      
+      </td>
+      {% else %}
+      <td>{{order.get_status_display}}</td>
+     
+      {% endif %}
+
+     
+     
+    </tr>
+    {% endfor %}
+  </tbody>
+ 
+</table>
+
+<nav aria-label="Page navigation example d-flex " style="display: flex;
+align-items: center;
+justify-content: end;">
+  <ul class="pagination mr-5">
+    {% if product.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page={{ product.previous_page_number }}">Previous</a></li>
+     {% endif %}
+    
+    
+      {% for i in product.paginator.page_range %}
+      {% if product.number == i %}
+      <li class="page-item">   <a class="page-link" href="#">{{ i }} </a></li>
+      {% else %}
+      <li class="page-item">  <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+   
+    {% if product.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ product.next_page_number }}">Next</a></li>
+     {% endif %}
+  </ul>
+</nav>
+<script>
+$(document).ready(function () {
+  $(".v1").change(function () {
+    var elementId = $(this).attr('id');
+    var selectedValue = $(this).val();
+    
+    console.log(selectedValue)
+    $.ajax({
+  
+      url: `/order/${elementId }/${selectedValue }`,
+      type: "GET",
+      success: function (response) {
+        console.log(response.true) ;              
+        if(response.y=="true")
+        {
+          alert("quantity is less");
+          location.reload();
+        }
+        location.reload();
+         
+       
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+      },
+    });
+  });
+});
+
+</script>
+ {% endblock %}

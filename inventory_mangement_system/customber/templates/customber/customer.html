@@ -1,0 +1,162 @@
+{% extends "user/base.html" %}
+{% load static %}
+{% block inventorycontent %}
+{% endblock inventorycontent %}
+
+{% block maincontent %}
+
+  
+  <div class="container-fluid "  >
+    <div class="d-flex" style="height:18rem; border-radius:25px;"   >
+   
+     <div  class="col-5" style="border-radius:25px;">
+      <div class="card" style="border-radius:30px;">
+        <div class="card-body" >
+          <div class="d-flex" style="justify-content:space-between">
+            <div class="d-flex" style="flex-direction:column">
+              <div class="d-flex"><img src="{% static 'images/user.jpg' %}" alt="logo" class="figure-img img-fluid " style="height: 4rem; border-radius:25px;"  >
+               <div>
+                <div class="ml-4">
+                  <h1 class="card-title" style="font-family: Cardo;
+                  font-size: 20px;
+                  font-weight: 400;
+                  line-height: 27px;
+                  letter-spacing: 0em;
+                  text-align: left;
+                  color: #545454;
+">Vaishnav Bari </h1>
+                <h6 class="card-title" style="font-family: Cardo;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: #545454;">Last order : 05/2/2020</h6>
+                </div>
+               </div>
+              </div>
+              
+            </div>
+            <div>
+              <button class="btn"  style="background: #9DBDBAB2; color: #07534C;
+              
+              ">Active</button>
+            </div>
+          </div>
+          <div class="d-flex" style="justify-content:space-between">
+            <div class="d-flex" style="flex-direction:column">
+              <h6 class="card-title" style="font-family: Cardo;
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 16px;
+              letter-spacing: 0em;
+              text-align: left;
+              color: #000000;
+">Phone Number </h6>
+              <h4 class="card-title" style="font-family: Cardo;
+              font-size: 15px;
+              font-weight: 700;
+              line-height: 20px;
+              letter-spacing: 0em;
+              text-align: left;
+            color: #000000;
+              ">123-456-7890</h4>
+            </div>
+            <div class="d-flex" style="flex-direction:column">
+              <h6 class="card-title" style="font-family: Cardo;
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 16px;
+              letter-spacing: 0em;
+              text-align: left;
+             color: #000000;
+">Email</h6>
+              <h4 class="card-title" style="font-family: Cardo;
+font-size: 15px;
+font-weight: 700;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+color: #000000;
+">vk@gamil.com</h4>
+            </div>
+          </div>
+          <div class="d-flex" style="justify-content:space-between">
+            <div class="d-flex" style="flex-direction:column">
+              <h6 class="card-title" style="font-family: Cardo;
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 16px;
+              letter-spacing: 0em;
+              text-align: left;
+              color: #000000;
+              ">Address</h6>
+              <h4 class="card-title" style="font-family: Cardo;
+              font-size: 15px;
+              font-weight: 700;
+              line-height: 20px;
+              letter-spacing: 0em;
+              text-align: left;
+              color: #000000;
+              "> York Rd, Towson, MD 21128</h4>
+            </div>
+            <div>
+            
+            </div>
+          </div>
+        
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+<hr>
+   <div class="container-fluid">
+    <table class="table bg-white col-11 " style="border-radius:25px; width:91%; margin-top:20px; margin-left:20px; margin-right:20px;">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">First_name</th>
+          <th scope="col">Last_name</th>
+          <th scope="col">date_joined</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in product %}
+        <tr>
+          <th scope="row">{{user.id}}</th>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.date_joined}}</td>
+        </tr>
+       {% endfor %}
+       
+      </tbody>
+    </table>
+   </div>
+
+   <nav aria-label="Page navigation example d-flex " style="display: flex;
+   align-items: center;
+   justify-content: end;">
+     <ul class="pagination mr-9" style="margin-right: 3rem;">
+       {% if product.has_previous %}
+       <li class="page-item"><a class="page-link" href="?page={{ product.previous_page_number }}">Previous</a></li>
+        {% endif %}
+       
+       
+         {% for i in product.paginator.page_range %}
+         {% if product.number == i %}
+         <li class="page-item">   <a class="page-link" href="#">{{ i }} </a></li>
+         {% else %}
+         <li class="page-item">  <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+         {% endif %}
+         {% endfor %}
+      
+       {% if product.has_next %}
+       <li class="page-item"><a class="page-link" href="?page={{ product.next_page_number }}">Next</a></li>
+        {% endif %}
+     </ul>
+   </nav>
+   
+
+{% endblock %}

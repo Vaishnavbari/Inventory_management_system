@@ -1,0 +1,149 @@
+
+{% extends "user/base.html" %} 
+{% load static %}
+{% block maincontent %}
+
+<div>
+  <div class="d-flex w-100" style="justify-content: space-between;">
+    <div class="productsummry w-25 mx-3" style=" margin-left:1.3rem;">
+      <div class="productsummry1 d-flex" style="flex-wrap:nowrap"> 
+        <img src="{% static 'images/vkb.jpg' %}" class="img-fluid mz ml-3" alt="" style="">
+
+
+        <span 
+          style="
+          font-family: Cardo;
+          font-size: 1.5rem;
+          font-weight: 700;
+          line-height: 27px;
+          letter-spacing: 0em;
+          
+          color: #000000;
+
+          "
+        class="myclass2 ml-3" >
+  
+        Product Summary
+        
+        </span>
+      </div>
+      <div class="productsummry2 ">
+        <ul style="display: flex; justify-content: space-around;     margin-left: -49px;">
+          <li class="d-flex" style="flex-direction:column; align-items:center; justify-content:center;">
+            <span class="h5 myclass g">All Products</span>
+            <p class="h6 myclass v">{{total_quantity.total_quantity__sum}}</p>
+          </li>
+          <li class="d-flex" style="flex-direction:column; align-items:center; justify-content:center;">
+            <span class="h5 myclass g">In Store</span>
+            <p class="h6 myclass v">{{in_stock.quantity_in_stock__sum}}</p>
+          </li>
+          <li class="d-flex" style="flex-direction:column; align-items:center; justify-content:center;">
+            <span class="h5 myclass g" >Low in stock</span>
+            <p class="h6 myclass v">{{low_in_stock.quantity_in_stock__sum}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category w-75" style="    margin-right: 1.3rem;">
+      <div class="category1 d-flex" style="flex-wrap:nowrap">
+        <img src="{% static 'images/jpg.jpg' %}" class="img-fluid mz" alt="">
+
+        <span class=" text-sm text-md-lg text-lg-xl myclass2 ml-3" style="
+        font-family: Cardo;
+        font-size:1.5rem;
+        font-weight: 700;
+    
+      ">Category</span>
+      </div>
+
+      <div class="category2">
+        {% for category in category %}
+        <div class="categories x" style="width: 10rem; 
+        height: 5.625rem; 
+        top: 20.1875rem; 
+        left: 67.0625rem; 
+        border-radius: 0.9375rem;
+        border-width: 0.1875rem;
+        border: 3px solid #EEA47F "
+        >
+          <p class="h4 myclass ">{{category}}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div >
+ 
+    <table class="table tables t" style="border-radius: 10px; margin-left:1.3rem; margin-right:1.3rem; width:97%;">
+   
+      <thead>
+       
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">product_name</th>
+          <th scope="col">product_category</th>
+          <th scope="col">selling_price</th>
+
+          <th scope="col">cost_price</th>
+          <th scope="col">quantity</th>
+          <th scope="col">delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in product %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>
+            
+            <a href="{% url 'view' product.id %}"
+               style="color:blue">{{product.product_name}}</a
+            >
+          </td>
+          <td>
+          {{product.product_category}}
+          </td>
+        
+          <td>{{product.selliing_price}}</td>
+          <td>{{product.cost_price}}</td>
+          <td>{{product.quantity_in_stock}}</td>
+          <td>
+            <button  class="btn btn-warning" >
+              <a href="{% url 'deleteinventory' product.id %}" style="color:white">Delete</a>
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% comment %}
+  </div>
+  {% endcomment %}
+  <nav aria-label="Page navigation example d-flex " style="display: flex;
+  align-items: center;
+  justify-content: end;">
+    <ul class="pagination mr-5">
+      {% if product.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ product.previous_page_number }}">Previous</a></li>
+       {% endif %}
+      
+      
+        {% for i in product.paginator.page_range %}
+        {% if product.number == i %}
+        <li class="page-item">   <a class="page-link" href="#">{{ i }} </a></li>
+        {% else %}
+        <li class="page-item">  <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+     
+      {% if product.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ product.next_page_number }}">Next</a></li>
+       {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endblock maincontent %}

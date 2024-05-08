@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+  </head>
+  <style>
+    body{
+      margin:0;
+      padding:0;
+      
+    }
+  .active{
+   
+    border: 1px solid #26599F;
+    background: #72A0C140;
+    text-decoration:underline;
+  }
+    
+  .main{
+
+     
+    background-image: url("{% static 'images/bacground.png' %}");
+    background-size:cover;
+  
+    }
+  @media screen  and (max-width:1459px) {
+    .myclass{
+      font-size: 1.4rem !important;
+    }
+    .myclass2{
+      font-size: 1.5rem !important;
+      display: flex;
+    align-self: center;
+    }
+    .y{
+      font-size: 0.5rem !important;
+    }
+    .categories {
+      height: 4rem;
+      width: 7rem;
+      
+  }
+  .mz{
+    width: 1.75rem !important;;
+    height: 1.75rem !important;;
+  }
+  .x{
+    width: 7rem !important;
+    height: 3.625rem !important;
+  }
+  .t{
+    width:96% !important;
+  }
+  .productsummry {
+    width: 12rem !important;
+
+  }
+  .category {
+    width:18rem !important;
+  }
+
+
+  }
+ @media screen and (max-width:1700px) {
+  .myclass2{
+  
+    display: flex;
+  align-self: center;
+  }
+  .myclass3{
+    font-size:3.2rem !important;
+  }
+  .mz{
+    width: 2.75rem !important;;
+    height: 2.75rem !important;;
+  }
+  .myclass4{
+    font-size: 1rem !important;
+  }
+  .myclass5{
+    font-size: 2rem !important;
+  }
+  .myclass6{
+    font-size: 0.5rem !important;
+  }
+  .myclass7{
+    font-size: 0.8rem !important;
+  }
+  
+ }
+
+ @media screen and (max-width:1227px) {
+  .myclass3{
+    font-size:2.2rem !important;
+  }
+  .myclass4{
+    font-size: 0.8rem !important;
+    
+  }
+  .myclass2{
+    font-size: 0.8rem !important;
+    display: flex;
+    align-self: center;
+  }
+  .mz{
+    width: 1.75rem !important;;
+    height: 1.75rem !important;;
+  }
+  .j{
+    margin-top: 8px;
+  }
+  .myclass5{
+    font-size: 1.2rem !important;
+  }
+  .myclass6{
+    font-size: 0.5rem !important;
+  }
+  
+ }
+  @media screen and (max-width:1744px) {
+    .productsummry {
+      width: 25rem !important;
+  
+    }
+    .category {
+      width:43rem !important;
+    }
+    .x{
+      width: 8rem !important;
+      height: 5rem !important;
+    }
+    .t{
+      width:97% !important;
+    }
+  }
+.g{
+  font-family: Cardo;
+font-size: 1rem !important;
+font-weight: 400;
+line-height: 20px;
+letter-spacing: 0em;
+color: #545454;
+
+
+}
+.v{
+  font-family: Cardo;
+font-size: 1.9rem;
+font-weight: 400;
+line-height: 30px;
+letter-spacing: 0em;
+text-align: left;
+color: #000000;
+
+
+}
+.dotted-hr {
+  border: none;
+  border-top: 1px dotted #000; 
+}
+  </style>
+  <body>
+    <div class="main col-12 container-fluid img-fluid"  style="min-height: 100vh" >
+      <div class="left fs-1  container-fluid" style="min-height: 100vh">
+        <ul style="margin-left:-20px">
+          <li>
+            <div class="img img-fluid"></div>
+          </li>
+
+          <li>
+            <a href="{% url 'dashboard' %}">
+            <div class="menus {{dashboard}}">
+              <img src="{% static 'images/n1.jpg' %}" class="img-fluid mz" alt="" style="background:None">
+
+              <span class="h" >Dashboard</span>
+            </div>
+          </a>
+          </li>
+          <li >
+           <a href="{% url 'inventory' %}"  >
+            <div class="menus {{inventory}}"  >
+              <img src="{% static 'images/n2.jpg' %}" class="img-fluid mz" alt="">
+              <span class="h " >inventory</span>
+            </div>
+           </a>
+          </li>
+          <li>
+            <a href="{% url 'order' %}">
+            <div class="menus {{order}}">
+              <img src="{% static 'images/n3.jpg' %}" class="img-fluid mz" alt="">
+              <span class="h" > orders</span>
+            </div>
+          </a>
+          </li>
+          <li>
+            <a href="{% url 'customer' %}">
+            <div class="menus {{customber}}">
+              <img src="{% static 'images/n3.jpg' %}" class="img-fluid mz" alt="">
+              <span class="h" >customers</span>
+            </div>
+          </a>
+          </li>
+          <li>
+            <div class="menu">
+                <i class="fas fa-sign-out-alt"></i>
+              <span class="h" ><a href="{% url 'logout' %}">logout</a></span>
+            </div>
+          </li>
+          
+        </ul>
+      </div>
+      <div class="right fs-1 container-fluid" style="height:fit-content">
+<div class="righticons container" >
+
+<div class="row col-12 d-flex" >
+  <div class="col-6 d-flex mt-3" style="justify-content:end;">
+    <input type="text" placeholder="search here" class="input-group-text" style=" border-radius:22px; width:28rem";>
+  </div>
+  <div class="col-6 d-flex mt-3" style="justify-content:end;">
+  
+   <i class="fas fa-user myclass" style="font-size:2rem; background:None" ></i>
+  
+   <i class="fas fa-bell myclass"  style="font-size:2rem; background:None" ></i> 
+  </div>
+  </div>
+</div>
+<hr>
+<i class="fas fa-home" style="margin-left:1.3rem; background:none"></i> / inventory
+
+<hr>
+</hr>
+
+
+{% block inventorycontent %}
+  <div class="inventoryssummary" style="display: flex;
+  justify-content: space-between;" >
+    <p class="h2 s myclass" style="font-family: Cardo;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 0em;
+    margin-left:1.3rem;">
+      Inventory Summary
+    </p>
+    <a href="{% url 'addinventory' %}" class="p-20"style="color:white; font-size: 1rem;">
+    <button class="btn" style="width: 13.7rem;
+    height: 3.2rem
+    
+    border-radius: 10px  ; 
+    background: #26599F;
+color:white;
+margin-right:1.3rem; ">
+      
+      <span style="font-family: Cardo;
+      font-size: 1rem;
+      font-weight: 400;
+      
+    
+       "> + Add New Product </span>
+    </button>
+    
+  </a>
+  </div>
+  <hr>{% endblock inventorycontent %}
+  
+{% block maincontent %}
+  
+        {% endblock maincontent %}
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </body>
+</html>
