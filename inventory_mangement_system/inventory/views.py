@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Avg,Sum
 from django.core.paginator import Paginator
 from django.db.models import Q
+import json
 # Create your views here.
 
 # inventory page view
@@ -210,7 +211,6 @@ def editinventory(request,id):
                 imageinstanvce=image.objects.create(image=v,product_id=p_id)
         
             if error["product_name"]!=[] or error["selling_price"]!=[] or error["product_category"]!=[] or error ["cost_price"]!=[] or error["quantity"]!=[] or error["image"]!=[] or error["short_description"]!=[]:
-                print("if block")
                 return render(request,"app/edit_inventory2.html",{"error":error,"pro":pro,"image":i})
             else:
                 pro.save()
@@ -244,4 +244,34 @@ def check_product_exist(request,name):
         else:
             return HttpResponse("Product not exist ")
    except Exception as e:
+        return HttpResponse(f"Error occured {e} ")
+
+
+
+
+@login_required
+def search_inventory_content(request,selectedValue=None):
+    try:
+        all_data=product.objects.all().values()
+        if selectedValue:
+            all_data=all_data.filter(product_name__icontains=selectedValue)
+            
+        return JsonResponse({"data":list(all_data)})
+        
+    except Exception as e:
+        return HttpResponse(f"Error occured {e} ")
+
+
+
+@login_required
+def search_view_content(request,selectedValue=None):
+    try:
+        all_data=order.objects.all()
+        
+        if selectedValue:
+            all_data=all_data.filter(product_name__product_name__icontains=selectedValue)
+            
+        return render(request,"app/table.html",{"purchase":all_data})
+        
+    except Exception as e:
         return HttpResponse(f"Error occured {e} ")

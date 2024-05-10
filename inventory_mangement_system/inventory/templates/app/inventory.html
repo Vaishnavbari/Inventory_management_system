@@ -94,7 +94,7 @@
           <th scope="col">delete</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="generate">
         {% for product in product %}
         <tr>
           <th scope="row">{{ forloop.counter }}</th>
@@ -146,4 +146,52 @@
     </ul>
   </nav>
 </div>
+
+<script>
+  $(document).ready(function () {
+ $("#search").change(function () {
+   var selectedValue = $(this).val();
+   console.log(selectedValue);
+   
+   $.ajax({
+     url: `/inventory/search_product_content/${selectedValue}`,
+     
+     type: "GET",
+     
+     success: function (response) {
+      
+         $("#generate").empty();
+         var tbodyHTML = ''; 
+
+         $.each(response.data, function(index, response) {
+        
+             tbodyHTML += '<tr>';
+             var editurl = "{% url 'view' 0 %}".replace('0', response.product_id);
+             tbodyHTML += '<td><a href="' + editurl + '" style="color:blue" >' +  response.product_name +'</a></td>';
+             tbodyHTML += '<td>' + response.product_name + '</td>'; 
+             tbodyHTML += '<td>' + response.product_category + '</td>';
+             tbodyHTML += '<td>' + response.selling_price + '</td>';
+             tbodyHTML += '<td>' + response.cost_price + '</td>'; 
+             tbodyHTML += '<td>' + response.quantity + '</td>'; 
+
+          var deleteUrl = "{% url 'deleteinventory' 0 %}".replace('0', response.product_id);
+           tbodyHTML += '<td><a href="' + deleteUrl + '" class="btn btn-warning" style="color:white">Delete</a></td>';
+
+             tbodyHTML += '</tr>';
+         });
+    
+        
+         $('#generate').html(tbodyHTML);
+         
+      
+     },
+     error: function (xhr, status, error) {
+       console.error(error);
+     },
+   });
+ });
+});
+
+</script>
+
 {% endblock maincontent %}

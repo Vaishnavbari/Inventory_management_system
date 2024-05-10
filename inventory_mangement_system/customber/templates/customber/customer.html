@@ -121,10 +121,10 @@ color: #000000;
           <th scope="col">date_joined</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="generate">
         {% for user in product %}
         <tr>
-          <th scope="row">{{user.id}}</th>
+          <th scope="row">{{forloop.counter}}</th>
           <td>{{user.first_name}}</td>
           <td>{{user.last_name}}</td>
           <td>{{user.date_joined}}</td>
@@ -157,6 +157,49 @@ color: #000000;
         {% endif %}
      </ul>
    </nav>
+
+   <script>
+  $(document).ready(function () {
+ $("#search").change(function () {
+   var selectedValue = $(this).val();
+   console.log(selectedValue);
    
+   $.ajax({
+     url: `/customber/search_customer_content/${selectedValue}`,
+     
+     type: "GET",
+     
+     success: function (response) {
+      
+      
+         $("#generate").empty();
+         var tbodyHTML = ''; 
+
+         $.each(response.data, function(index, response) {
+              var displayIndex = index + 1;
+             tbodyHTML += '<tr>';
+              tbodyHTML += '<td>' + displayIndex + '</td>'; 
+  
+             tbodyHTML += '<td>' + response.first_name + '</td>'; 
+             tbodyHTML += '<td>' + response.last_name + '</td>';
+             tbodyHTML += '<td>' + response.date_joined + '</td>';
+             
+
+             tbodyHTML += '</tr>';
+         });
+    
+        
+         $('#generate').html(tbodyHTML);
+         
+      
+     },
+     error: function (xhr, status, error) {
+       console.error(error);
+     },
+   });
+ });
+});
+
+</script>
 
 {% endblock %}

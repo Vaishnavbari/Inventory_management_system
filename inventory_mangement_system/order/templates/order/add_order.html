@@ -67,7 +67,7 @@
           $("#product").empty();
           $("#product").append('<option value="">Choose product</option>');
           $.each(response.x, function (index, response) {
-            
+            console.log(response)
             $("#product").append(
               '<option value="' + response.poduct_id + '">' +
                 response.product_name +
@@ -138,6 +138,8 @@
       });
     });
   });
+
+  
 </script>
 
 {% endblock content %}

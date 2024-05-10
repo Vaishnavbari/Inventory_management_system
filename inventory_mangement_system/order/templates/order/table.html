@@ -1,0 +1,36 @@
+{% for order in product %}
+      <tr >
+        <td>{{forloop.counter}}</td>
+  
+        <td>{{order.product_name.product_name}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.order_total}}</td>
+        <td>{{order.order_date}}</td>
+        <td>{{order.tracking_id}}</td>
+        <td>
+          {{order.get_status_display}}
+        </td>
+        {% if order.get_status_display %}
+
+        {% if order.get_status_display == "pending" %}
+      <td>
+       
+        <select name="s" class="v1" id="{{order.id}}">
+          <option value="">Choose action</option>
+          <option value="4">cancel</option>
+          <option value="2">return</option>
+          <option value="3">Damaged</option>
+        </select>
+      
+      </td>
+      {% else %}
+        
+      <td>{{order.get_status_display}}</td>
+      {% endif %}
+    
+
+        {% endif %}
+       
+      </tr>
+      {% endfor %}
+    

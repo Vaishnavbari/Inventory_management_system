@@ -9,7 +9,11 @@ urlpatterns = [
     path("viewpage/<int:id>",views.viewinventory,name="view"),
     path("edit_inventory/<int:id>",views.editinventory,name="edit"),
     path("image/<int:id>",views.imagedeleted,name="image_delete"),
-    path("check/<name>",views.check_product_exist,name="check")
+    path("check/<name>",views.check_product_exist,name="check"),
+    path("search_product_content/",views.search_inventory_content),
+    path("search_product_content/<selectedValue>",views.search_inventory_content,name="search_invertory"),
+    path("search_view_content/",views.search_view_content),
+    path("search_view_content/<selectedValue>",views.search_view_content,name="search_view_invertory")
 
    
 ]

@@ -148,3 +148,16 @@ def quantityvalidtaion(request,id,quantity):
         return JsonResponse({"true":"true"})
     else:
       return JsonResponse({"false":"false"})  
+    
+
+@login_required
+def search_order_content(request,selectedValue=None):
+    try:
+        all_data=order.objects.all()
+        if selectedValue:
+            all_data=all_data.filter(product_name__product_name__icontains=selectedValue)
+            
+        return render(request,"app/table.html",{"order":all_data})
+        
+    except Exception as e:
+        return HttpResponse(f"Error occured {e} ")

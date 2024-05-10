@@ -6,6 +6,8 @@ from customber import views
 
 urlpatterns = [
     path("customer/",views.customerview,name="customer"),
+    path("search_customer_content/",views.search_customer_content),
+    path("search_customer_content/<selectedValue>",views.search_customer_content,name="search_customer_content")
 ]
 
 if settings.DEBUG:

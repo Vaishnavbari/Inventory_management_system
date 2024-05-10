@@ -1,0 +1,13 @@
+
+    {% for i in purchase %}
+    <tr>
+      <th >{{ forloop.counter }}</th>
+      <td>{{i.product_name}}</td>
+      <td>{{i.quantity}}</td>
+      <td>{{i.order_date}}</td>
+      <td>{{i.tracking_id}}</td>
+      <td>{{i.get_status_display}}</td>
+    </tr>
+    {% endfor %}
+    
+  

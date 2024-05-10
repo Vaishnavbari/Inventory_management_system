@@ -94,21 +94,40 @@
           <th scope="col">Status</th>
         </tr>
       </thead>
-      <tbody>
-        {% for i in purchase %}
-        <tr>
-          <th >{{ forloop.counter }}</th>
-          <td>{{i.product_name}}</td>
-          <td>{{i.quantity}}</td>
-          <td>{{i.order_date}}</td>
-          <td>{{i.tracking_id}}</td>
-          <td>{{i.get_status_display}}</td>
-        </tr>
-        {% endfor %}
-        
+      <tbody id="generate">
+        {% include "app/table.html" %}
       </tbody>
     </table>
 
+
+    <script>
+      $(document).ready(function () {
+        $("#search").change(function () {
+          var selectedValue = $(this).val();
+          console.log(selectedValue);
+          
+          $.ajax({
+            url: `/inventory/search_view_content/${selectedValue}`,
+            
+            type: "GET",
+            
+            success: function (response) {
+      
+                
+                $('#generate').html(response);
+                
+             
+            },
+            error: function (xhr, status, error) {
+              console.error(error);
+            },
+          });
+        });
+       });
+
+       
+    </script>
+   
 
 
 {% endblock %}

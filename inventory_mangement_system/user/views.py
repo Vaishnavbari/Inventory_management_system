@@ -17,6 +17,8 @@ from inventory.models import product
 from user.models import user_registration
 from django.db.models import Q
 from django.db.models.functions import Coalesce
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 
 # login Page view
@@ -111,6 +113,7 @@ def registerpageview(request):
 
 
 # login validation
+@csrf_exempt
 def loginvalidation(request):
      try:
         if request.method=="POST":

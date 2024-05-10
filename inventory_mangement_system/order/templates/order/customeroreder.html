@@ -90,43 +90,8 @@
 
       </tr>
     </thead>
-    <tbody>
-      {% for order in product %}
-      <tr>
-        <td>{{forloop.counter}}</td>
-  
-        <td>{{order.product_name.product_name}}</td>
-        <td>{{order.quantity}}</td>
-        <td>{{order.order_total}}</td>
-        <td>{{order.order_date}}</td>
-        <td>{{order.tracking_id}}</td>
-        <td>
-          {{order.get_status_display}}
-        </td>
-        {% if order.get_status_display %}
-
-        {% if order.get_status_display == "pending" %}
-      <td>
-       
-        <select name="s" class="v1" id="{{order.id}}">
-          <option value="">Choose action</option>
-          <option value="4">cancel</option>
-          <option value="2">return</option>
-          <option value="3">Damaged</option>
-        </select>
-      
-      </td>
-      {% else %}
-        
-      <td>{{order.get_status_display}}</td>
-      {% endif %}
-    
-
-        {% endif %}
-       
-      </tr>
-      {% endfor %}
-    
+    <tbody id="generate">
+      {% include "order/table.html" %}
     </tbody>
   </table>
   <nav aria-label="Page navigation example d-flex " style="display: flex;
@@ -186,6 +151,32 @@
           });
         });
       });
+
+      $(document).ready(function () {
+        $("#search").change(function () {
+          var selectedValue = $(this).val();
+          console.log(selectedValue);
+          
+          $.ajax({
+            url: `/order/search_order_content/${selectedValue}`,
+            
+            type: "GET",
+            
+            success: function (response) {
+      
+                
+                $('#generate').html(response);
+                
+             
+            },
+            error: function (xhr, status, error) {
+              console.error(error);
+            },
+          });
+        });
+       });
+      
+      
     </script>
   </body>
 </html>
