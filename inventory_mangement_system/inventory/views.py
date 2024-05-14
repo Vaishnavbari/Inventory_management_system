@@ -42,7 +42,7 @@ def inventory(request):
 
         return render(request,"app/inventory.html",context)
    except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
 
 # add inventory form
@@ -116,7 +116,7 @@ def add_inventory_form(request):
         else:
             return render(request,"app/add_inventory2.html",{"category":category.objects.all()})
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
 
 # delete product
@@ -127,7 +127,7 @@ def deleteproduct(request,id):
         pro.delete()
         return redirect("inventory")
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
 
 # view inventory 
@@ -149,7 +149,7 @@ def viewinventory(request,id):
         return render(request,"app/view.html",{"product":prod,"image":Get_image,"purchase":purchase_history,"count":count,"sold":sold})
     
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
 
 # Edit inventory 
@@ -220,7 +220,7 @@ def editinventory(request,id):
             return render(request,"app/edit_inventory2.html",{"pro":pro,"image":i,"category":category.objects.all()})
         
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
     
 
@@ -232,7 +232,7 @@ def imagedeleted(request,id):
         delete_image.delete()
         return HttpResponse("image deleted successfully ")
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
 
 @login_required
@@ -244,8 +244,7 @@ def check_product_exist(request,name):
         else:
             return HttpResponse("Product not exist ")
    except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
-
+       return redirect("500page")
 
 
 
@@ -256,10 +255,10 @@ def search_inventory_content(request,selectedValue=None):
         if selectedValue:
             all_data=all_data.filter(product_name__icontains=selectedValue)
             
-        return JsonResponse({"data":list(all_data)})
+        return render(request,"app/table2.html",{"product":all_data})
         
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
 
 
@@ -274,4 +273,4 @@ def search_view_content(request,selectedValue=None):
         return render(request,"app/table.html",{"purchase":all_data})
         
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")

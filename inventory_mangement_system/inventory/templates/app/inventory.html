@@ -95,29 +95,7 @@
         </tr>
       </thead>
       <tbody id="generate">
-        {% for product in product %}
-        <tr>
-          <th scope="row">{{ forloop.counter }}</th>
-          <td>
-            
-            <a href="{% url 'view' product.id %}"
-               style="color:blue">{{product.product_name}}</a
-            >
-          </td>
-          <td>
-          {{product.product_category}}
-          </td>
-        
-          <td>{{product.selliing_price}}</td>
-          <td>{{product.cost_price}}</td>
-          <td>{{product.quantity_in_stock}}</td>
-          <td>
-            <button  class="btn btn-warning" >
-              <a href="{% url 'deleteinventory' product.id %}" style="color:white">Delete</a>
-            </button>
-          </td>
-        </tr>
-        {% endfor %}
+        {% include "app/table2.html" %}
       </tbody>
     </table>
     {% comment %}
@@ -160,28 +138,7 @@
      
      success: function (response) {
       
-         $("#generate").empty();
-         var tbodyHTML = ''; 
-
-         $.each(response.data, function(index, response) {
-        
-             tbodyHTML += '<tr>';
-             var editurl = "{% url 'view' 0 %}".replace('0', response.product_id);
-             tbodyHTML += '<td><a href="' + editurl + '" style="color:blue" >' +  response.product_name +'</a></td>';
-             tbodyHTML += '<td>' + response.product_name + '</td>'; 
-             tbodyHTML += '<td>' + response.product_category + '</td>';
-             tbodyHTML += '<td>' + response.selling_price + '</td>';
-             tbodyHTML += '<td>' + response.cost_price + '</td>'; 
-             tbodyHTML += '<td>' + response.quantity + '</td>'; 
-
-          var deleteUrl = "{% url 'deleteinventory' 0 %}".replace('0', response.product_id);
-           tbodyHTML += '<td><a href="' + deleteUrl + '" class="btn btn-warning" style="color:white">Delete</a></td>';
-
-             tbodyHTML += '</tr>';
-         });
-    
-        
-         $('#generate').html(tbodyHTML);
+         $('#generate').html(response);
          
       
      },

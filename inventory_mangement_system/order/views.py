@@ -47,7 +47,7 @@ def orderview(request):
         return render(request,"order/order.html",{"order":"active","product":page_obj,"all_order_count":all_order_count,"pending":pending_count,"completed":completed_count,"cancel":cancelled,"return":c_returned,"damaged":damaged})
 
     except Exception as e:
-        return HttpResponse(f"Error occured {e}")
+        return render("500page")
 
 
 # add order 
@@ -68,7 +68,7 @@ def addorder(request):
             return render(request,"order/add_order.html",{"category":category.objects.all(),"product":product.objects.all()})
         
     except Exception as e:
-        return HttpResponse(f"Error occured {e}")
+        return render("500page")
 
 
 # customer order page 
@@ -84,7 +84,7 @@ def customer_order_page(request):
 
          return render(request,"order/customeroreder.html",{"order":"active","product":page_obj})
     except Exception as e:
-        return HttpResponse(f"Error occured {e}")
+         return render("500page")
    
 
 @login_required
@@ -97,7 +97,7 @@ def show_selected_product(request,id):
             x.append(g)
         return JsonResponse({"x":x})
     except Exception as e:
-        return HttpResponse(f"Error occured {e}")
+        return render("500page")
 
 
 # count price
@@ -109,55 +109,75 @@ def count_price(request,id,quantity):
         x=c.selliing_price*quantity
         return JsonResponse({"x":x})
     except Exception as e:
-        return HttpResponse(f"Error occurred {e}")
+        return render("500page")
 
 
 
 @login_required
 def statuscompletedurl(request,id,selected_value):
-        y=order.objects.get(id=id)
-        if selected_value=="1":
-            if y.product_name.quantity_in_stock>= y.quantity:
-                qunatity=y.product_name.quantity_in_stock- y.quantity
-                y.product_name.quantity_in_stock=qunatity
-                y.product_name.save()
-                y.status="1"
+        try:
+            y=order.objects.get(id=id)
+            if selected_value=="1":
+                if y.product_name.quantity_in_stock>= y.quantity:
+                    qunatity=y.product_name.quantity_in_stock- y.quantity
+                    y.product_name.quantity_in_stock=qunatity
+                    y.product_name.save()
+                    y.status="1"
+                    y.save()
+                    return JsonResponse({"y":"false"})
+                else:
+                    return JsonResponse({"y":"true"})
+            elif selected_value=="2":
+                y.status="2"
                 y.save()
-                return JsonResponse({"y":"false"})
-            else:
-                 return JsonResponse({"y":"true"})
-        elif selected_value=="2":
-            y.status="2"
-            y.save()
-            return redirect('cusomerorder')
-        elif selected_value=="3":
-            y.status="3"
-            y.save()
-            return redirect('cusomerorder')
-        elif selected_value=="4":
-            y.status="4"
-            y.save()
-            return redirect('cusomerorder')
+                return redirect('cusomerorder')
+            elif selected_value=="3":
+                y.status="3"
+                y.save()
+                return redirect('cusomerorder')
+            elif selected_value=="4":
+                y.status="4"
+                y.save()
+                return redirect('cusomerorder')
+        except :
+            return render("500page")
 
 
 @login_required
 def quantityvalidtaion(request,id,quantity):
-    p=product.objects.get(id=id)
+    try:
+        p=product.objects.get(id=id)
+        
+        if p.quantity_in_stock<quantity:
+            return JsonResponse({"true":"true"})
+        else:
+            return JsonResponse({"false":"false"})  
+    except Exception as e:
+       return render("500page")
     
-    if p.quantity_in_stock<quantity:
-        return JsonResponse({"true":"true"})
-    else:
-      return JsonResponse({"false":"false"})  
+
+# @login_required
+# def search_order_content(request,selectedValue=None):
+#     try:
+#         all_data=order.objects.all()
+#         if selectedValue:
+#             all_data=all_data.filter(product_name__product_name__icontains=selectedValue)
+#         print(all_data)
+#         return render(request,"order/table2.html",{"product":all_data})
+        
+#     except Exception as e:
+#         return render("500page")
     
 
 @login_required
-def search_order_content(request,selectedValue=None):
+def search_order_content_view(request,selectedValue=None):
     try:
         all_data=order.objects.all()
+        
         if selectedValue:
             all_data=all_data.filter(product_name__product_name__icontains=selectedValue)
-        print(all_data)
-        return render(request,"order/table.html",{"product":all_data})
+            
+        return render(request,"order/table3.html",{"product":all_data})
         
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return render("500page")

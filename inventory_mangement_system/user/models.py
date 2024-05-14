@@ -6,4 +6,4 @@ from django.contrib.auth.models import AbstractUser
 
 # user registartion 
 class user_registration(AbstractUser):
-     pass
+     pass     

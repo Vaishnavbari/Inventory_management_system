@@ -12,8 +12,8 @@ urlpatterns = [
     path("count/<int:id>/<int:quantity>",views.count_price,name="count_price"),
     path("<int:id>/<selected_value>",views.statuscompletedurl,name="status_complted"),
     path("validation/<int:id>/<int:quantity>",views.quantityvalidtaion,name="quantity_validation"),
-     path("search_order_content/",views.search_order_content),
-    path("search_order_content/<selected_value>",views.search_order_content,name="search_order_content"),
+     path("search_order_content/",views.search_order_content_view),
+    path("search_order_content/<selectedValue>",views.search_order_content_view,name="search_order_content"),
 
 ]
 if settings.DEBUG:

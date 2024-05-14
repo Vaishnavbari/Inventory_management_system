@@ -18,6 +18,24 @@ from user.models import user_registration
 from django.db.models import Q
 from django.db.models.functions import Coalesce
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.conf import settings
+from django.urls import reverse
+from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetCompleteView
+from django.urls import reverse_lazy
+def page_404(request,exception):
+    return render(request,"errorpage404.html", status=404)
+
+
+def page_500(request):
+    return render(request,"errorpage500.html",status=500)
 
 # Create your views here.
 
@@ -34,16 +52,17 @@ def loginpageview(request):
             password=request.COOKIES.get("password")
             return render(request,"user/login2.html")
     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+        return redirect("500page")
 
 
 # registration page
 def registerpageview(request):
-     try:
+    try:
         error={
             "firstname":[],
             "lastname" :[],
             "password":[],
+            "email":[],
             "username":[]
 
         }
@@ -67,13 +86,16 @@ def registerpageview(request):
             if str(lastname).isdigit():
                 error["lastname"].append("lastname contain mixing of number and character")
 
-            username=request.POST['username']
-            if str(username).strip()=="":
-                error["username"].append("username not empty")
-            if len(str(lastname))<2:
-                error["username"].append("enter username length beetween 2 and 12 ")
-            if str(lastname).isdigit():
-                error["username"].append("username contain mixing of number and character")
+            email=request.POST['email']
+            if str(email).strip()=="":
+                error["email"].append("Email not empty")
+            if len(str(email))<2:
+                error["email"].append("enter email length beetween 2 and 12 ")
+            if str(email).isdigit():
+                error["email"].append("email contain mixing of number and character")
+            if not str(email).endswith("@gmail.com"):
+                error["email"].append("enter valid email")
+
 
             password=request.POST['password']
             if str(password).strip()=="":
@@ -84,32 +106,46 @@ def registerpageview(request):
                 error["password"].append("password contain mixing of number and character")
             if not(str(password).isalnum()):
                 error["password"].append("password contain mixing of number and character") 
+
+            username=request.POST['username']
+            if str(firstname).strip()=="":
+                error["username"].append("username not empty")
+            if len(str(firstname))<2:
+                error["username"].append("enter username length beetween 2 and 12 ")
+            if str(firstname).isdigit():
+                error["username"].append("username contain mixing of number and character")
+
             data={
                 "firstname":firstname,
                 "lastname":lastname,
-                "username":username,
-                "password":password      
+                "email":email,
+                "password":password ,
+                "username":username     
             }
-        
-            if error['firstname']!=[] or error["lastname"]!=[] or error["password"]!=[] or error["username"]!=[]:
+
+            if error['firstname']!=[] or error["lastname"]!=[] or error["password"]!=[] or error["email"]!=[] or error['username']!=[]:
                 return render(request,"user/register2.html",{"error":error,"data":data})
             else:
-                if user_registration.objects.filter(username=username).exists():
-                    messages.info(request,f"user {username} already exist")
+                if user_registration.objects.filter(email=email).exists():
+                    messages.info(request,f"user {email} already exist")
+                    return render(request,"user/register2.html",{"data":data})
+                elif user_registration.objects.filter(username=username).exists():
+                    messages.info(request,f"username {username} already exist")
                     return render(request,"user/register2.html",{"data":data})
                 else:
                     user=user_registration.objects.create(
                         first_name=firstname,
                         last_name=lastname,
                         username=username,
+                        email=email,
                         password=make_password(password))
-                    messages.success(request,f"User {username} registered succesfully !!!")
+                    messages.success(request,f"User {email} registered succesfully !!!")
                     return render(request,"user/register2.html")
         else:
             return render (request,"user/register2.html")
-        
-     except Exception as e:
-        return HttpResponse(f"Error occured {e} ")
+            
+    except Exception as e:
+        return redirect("500page")
 
 
 # login validation
@@ -157,19 +193,24 @@ def loginvalidation(request):
          
      except Exception as e:
         return HttpResponse(f"Error occured {e} ")
-
       
 # base page view 
 @login_required
 def baseview(request):
-    return render(request,"user/base.html")
+    try:
+      return render(request,"user/base.html")
+    except Exception as e:
+        return redirect("500page")
 
 
 # log out user 
 @login_required
 def logoutuser(request):
-    logout(request)
-    return redirect("login")
+    try:
+        logout(request)
+        return redirect("login")
+    except Exception as e:
+        return redirect("500page")
 
 # dashboard url
 @login_required
@@ -236,4 +277,69 @@ def dashboard(request):
         return render(request,"user/dashboard.html",context)
     
     except Exception as e:
-        return HttpResponse(f"Error occured : {e} ")
+        return redirect("500page")
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        user = user_registration.objects.filter(email=email).first()
+        if user:
+            # Generate a password reset token
+            token = default_token_generator.make_token(user)
+            # Encode the user's primary key (usually the user ID)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            # Construct the password reset link
+            password_reset_url = f"http://127.0.0.1:8000/password_request_confirm/{uid}/{token}"
+           
+            # Construct the password reset email
+            email_subject = 'Password Reset Request'
+            email_body = render_to_string('user/password_reset_email.txt', {
+                'user': user,
+                'password_reset_url': password_reset_url,
+            })
+            # Send the email
+            send_mail(email_subject, email_body, user.email, [user.email])
+            messages.success(request,"password reset link send sucessfully")
+            return redirect('login')
+        
+    return render(request, 'user/resetpassword.html')
+def password_reset_confirm(request, uidb64, token):
+    
+    uid = force_str(urlsafe_base64_decode(uidb64))
+    user = user_registration.objects.get(pk=uid)
+
+    if user and default_token_generator.check_token(user, token):
+        # Password reset token is valid, allow the user to reset their password
+        if request.method == "POST":
+            password = request.POST['password']
+            print(password)
+            user.password=make_password(password)
+            user.save()
+            messages.success(request,"password changed sucessfully")
+            return redirect('login')
+        return render(request, 'user/password_resetconfirm.html')
+    else:
+        return HttpResponse('Invalid password reset link.')
+    
+
+def change_password(request):
+    try:
+        if request.method == "POST":
+            password1 = request.POST['password']
+            password2 = request.POST['cpassword']
+
+            if password1 != password2 :
+                messages.error(request,"password dosent match")
+                return render(request, 'user/change_password.html')
+            if request.user:
+                request.user.password=make_password(password2)
+                print(request.user.password,">>>>>>>>>>>>>>>>>")
+                request.user.save()
+                return redirect("inventory")
+        
+        else:
+            return render(request, 'user/change_password.html')
+    except:
+        return redirect("500page")
+                

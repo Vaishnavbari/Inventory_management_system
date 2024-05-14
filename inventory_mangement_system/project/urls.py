@@ -19,6 +19,7 @@ from django.urls import path,include
 from inventory import views
 from django.conf import settings
 from django.conf.urls.static import static
+from user import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +27,14 @@ urlpatterns = [
     path("inventory/",include("inventory.urls")),
     path("order/",include("order.urls")),
     path("customber/",include("customber.urls")),
+     path("error404page/",views.page_404,name="404page"),
+    path("error500page/",views.page_500,name="500page"),
     
 ]
+
+handler404 = 'user.views.page_404'
+handler500 = 'user.views.page_500'
 if settings.DEBUG:
    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

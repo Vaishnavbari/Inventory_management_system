@@ -1,0 +1,23 @@
+{% for product in product %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>
+            
+            <a href="{% url 'view' product.id %}"
+               style="color:blue">{{product.product_name}}</a
+            >
+          </td>
+          <td>
+          {{product.product_category}}
+          </td>
+        
+          <td>{{product.selliing_price}}</td>
+          <td>{{product.cost_price}}</td>
+          <td>{{product.quantity_in_stock}}</td>
+          <td>
+            <button  class="btn btn-warning" >
+              <a href="{% url 'deleteinventory' product.id %}" style="color:white">Delete</a>
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
